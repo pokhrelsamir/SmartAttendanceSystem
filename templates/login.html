@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Attendance</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=20260720-4">
+</head>
+<body>
+    <main class="page-shell">
+        <header class="app-header">
+            <a class="brand" href="/" aria-label="Smart Attendance home">
+                <div class="brand-mark">SA</div>
+                <div>
+                    <p class="brand-subtitle">Face recognition attendance</p>
+                    <h1 class="brand-title">Smart Attendance</h1>
+                </div>
+            </a>
+        </header>
+
+        <section class="container narrow center-panel">
+            <p class="eyebrow">Account access</p>
+            <h1>Login</h1>
+            {% if error %}
+                <p class="status error">{{ error }}</p>
+            {% endif %}
+            <form method="POST" data-confirm-form data-confirm-title="Login now?" data-confirm-message="Confirm your credentials and continue to Smart Attendance." data-confirm-text="Login" data-confirmed-message="Checking credentials...">
+                {% csrf_token %}
+                <label>
+                    Username
+                    <input type="text" name="username" placeholder="Enter username" required>
+                </label>
+                <label>
+                    Password
+                    <input type="password" name="password" placeholder="Enter password" required>
+                </label>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+    </main>
+    <script src="{% static 'ui.js' %}?v=20260720-4"></script>
+</body>
+</html>

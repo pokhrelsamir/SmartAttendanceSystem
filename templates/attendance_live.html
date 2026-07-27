@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Attendance</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=20260720-4">
+</head>
+<body>
+    {% csrf_token %}
+    <main class="page-shell">
+        <header class="app-header">
+            <a class="brand" href="/" aria-label="Smart Attendance home">
+                <div class="brand-mark">SA</div>
+                <div>
+                    <p class="brand-subtitle">Teacher workspace</p>
+                    <h1 class="brand-title">Mark Attendance</h1>
+                </div>
+            </a>
+            <nav class="nav-actions">
+                <a class="button ghost" href="/" data-confirm-link data-confirm-title="Return home?" data-confirm-message="Leave live attendance and go back to the dashboard." data-confirm-text="Go Home">Home</a>
+            </nav>
+        </header>
+
+        <section class="container wide">
+            <p class="eyebrow">Live camera verification</p>
+            <h1>Mark Attendance</h1>
+            <p id="statusMsg" class="status">Detecting faces...</p>
+
+            <div class="video-wrapper" id="videoWrapper">
+                <video id="video" autoplay muted playsinline></video>
+                <canvas id="overlay" class="overlay"></canvas>
+            </div>
+
+            <div class="actions">
+                <button id="markBtn" type="button">Mark Attendance</button>
+            </div>
+
+            <h2>Attendance Taken In The Last 24 Hours</h2>
+            <div class="table-wrapper">
+                <table id="attendanceTable">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Teacher</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="{% static 'ui.js' %}?v=20260720-4"></script>
+    <script src="{% static 'live_detect.js' %}?v=20260720-4"></script>
+</body>
+</html>

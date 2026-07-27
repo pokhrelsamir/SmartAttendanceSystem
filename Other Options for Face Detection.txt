@@ -1,0 +1,4 @@
+MediaPipe Face Detection (Google)
+OpenCV DNN Face Detector
+InsightFace
+DeepFace

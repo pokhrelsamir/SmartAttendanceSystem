@@ -1,0 +1,10 @@
+Django
+psycopg2-binary
+python-dotenv
+insightface
+onnxruntime
+opencv-python
+numpy==1.26.4
+Pillow
+drf-yasg
+djangorestframework

@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Student</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=20260720-4">
+</head>
+<body>
+    {% csrf_token %}
+    <main class="page-shell">
+        <header class="app-header">
+            <a class="brand" href="/" aria-label="Smart Attendance home">
+                <div class="brand-mark">SA</div>
+                <div>
+                    <p class="brand-subtitle">Admin workspace</p>
+                    <h1 class="brand-title">Register Student</h1>
+                </div>
+            </a>
+            <nav class="nav-actions">
+                <a class="button ghost" href="/" data-confirm-link data-confirm-title="Return home?" data-confirm-message="Leave student registration and go back to the dashboard." data-confirm-text="Go Home">Home</a>
+            </nav>
+        </header>
+
+        <section class="container wide">
+            <p class="eyebrow">Student profile</p>
+            <h1>Register New Student</h1>
+            <p class="helper-text">Capture a clear face photo before saving the student profile.</p>
+
+            <div class="form-grid">
+                <label>
+                    Student ID
+                    <input type="text" id="studentIdInput" placeholder="Enter student ID" required>
+                </label>
+                <label>
+                    Full Name
+                    <input type="text" id="nameInput" placeholder="Enter full name" required>
+                </label>
+            </div>
+
+            <div class="camera-frame">
+                <video id="video" width="640" height="480" autoplay playsinline></video>
+                <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+            </div>
+
+            <div class="actions">
+                <button id="captureBtn" type="button">Capture Photo</button>
+                <button id="saveBtn" type="button" disabled>Save Registration</button>
+            </div>
+
+            <p id="statusMsg" class="status"></p>
+        </section>
+    </main>
+
+    <script src="{% static 'ui.js' %}?v=20260720-4"></script>
+    <script src="{% static 'script.js' %}?v=20260720-4"></script>
+</body>
+</html>

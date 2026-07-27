@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Attendance System</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=20260720-4">
+</head>
+<body>
+    <main class="page-shell">
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-mark">SA</div>
+                <div>
+                    <p class="brand-subtitle">Face recognition attendance</p>
+                    <h1 class="brand-title">Smart Attendance</h1>
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+                <a class="button ghost" href="/logout/" data-confirm-link data-confirm-title="Log out?" data-confirm-message="You will leave the current session." data-confirm-text="Logout" data-confirmed-message="Logging out...">Logout</a>
+            {% endif %}
+        </header>
+
+        <section class="container">
+            <p class="eyebrow">Welcome</p>
+            <h1>Smart Attendance System</h1>
+            {% if user.is_authenticated %}
+                <p class="hero-copy">Signed in as <strong>{{ user.username }}</strong>. Choose the workflow you need for this session.</p>
+                <div class="dashboard-grid">
+
+                    <!-- Admin Functions -->
+                    {% if user.is_superuser or user.groups.all.0.name == "Admin" %}
+                        <a class="action-card" href="/api/students/page/" data-confirm-link data-confirm-title="Open student registration?" data-confirm-message="You can capture a student photo and save their face profile." data-confirm-text="Open">
+                            <strong>Register Student</strong>
+                            <span>Add a student profile with ID, name and camera image.</span>
+                        </a>
+                    {% endif %}
+                    
+                    <!-- Teacher -->
+                    <!-- {% if user.is_superuser or user.groups.all.0.name == "Admin" %}
+                        <a class="action-card" href="/attendance-live/" data-confirm-link data-confirm-title="Open live attendance?" data-confirm-message="The camera page will open for marking attendance." data-confirm-text="Open">
+                            <strong>Mark Attendance</strong>
+                            <span>Verify liveness and record attendance for the current teacher.</span>
+                        </a>
+                    {% endif %} -->
+
+                    <!-- Teacher Functions -->
+                    {% if user.groups.all.0.name == "Teacher" %}
+                        <a class="action-card" href="/attendance-live/" data-confirm-link data-confirm-title="Open live attendance?" data-confirm-message="The camera page will open for marking attendance." data-confirm-text="Open">
+                            <strong>Mark Attendance</strong>
+                            <span>Verify liveness and record attendance for your students.</span>
+                        </a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p class="hero-copy">Login to register students, verify faces and mark attendance with a clean 24-hour student history.</p>
+                <div class="actions">
+                    <a class="button" href="/login/" data-confirm-link data-confirm-title="Go to login?" data-confirm-message="Open the secure login page." data-confirm-text="Login">Login</a>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+    <script src="{% static 'ui.js' %}?v=20260720-4"></script>
+</body>
+</html>
